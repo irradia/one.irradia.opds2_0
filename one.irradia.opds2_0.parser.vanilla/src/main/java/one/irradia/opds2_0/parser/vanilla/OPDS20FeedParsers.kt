@@ -21,7 +21,7 @@ class OPDS20FeedParsers : OPDS20FeedParserProviderType {
     documentURI: URI,
     stream: InputStream): OPDS20FeedParserType {
     val parser =
-      this.parsers.createParser(documentURI, stream, OPDS20ValueParsers.OPDS20ValueParserFeed())
+      this.parsers.createParser(documentURI, stream, OPDS20ValueParserFeed())
     return OPDS20FeedParser(parser)
   }
 

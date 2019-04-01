@@ -4,10 +4,10 @@ import one.irradia.mime.api.MIMEType
 import java.net.URI
 
 /**
- * A generic OPDS 2.0 link.
+ * An OPDS 2.0 navigation link.
  */
 
-data class OPDS20Link(
+data class OPDS20NavigationLink(
 
   /**
    * The target of the link.
@@ -16,14 +16,20 @@ data class OPDS20Link(
   val href: URI,
 
   /**
+   * The title of the link.
+   */
+
+  val title: String,
+
+  /**
    * The declared MIME type of the link, if any.
    */
 
-  val type: MIMEType? = null,
+  val type: MIMEType?,
 
   /**
-   * The declared link relations, if any.
+   * The declared link relation, if any.
    */
 
-  val relations: List<String> = listOf()): OPDS20ElementType
+  val relation: String?): OPDS20ElementType
 

@@ -21,7 +21,13 @@ data class OPDS20Feed(
   val metadata: OPDS20Metadata,
 
   /**
+   * The navigation section, if any.
+   */
+
+  val navigation: OPDS20Navigation?,
+
+  /**
    * The feed links
    */
 
-  val links: List<OPDS20Link>)
+  val links: List<OPDS20Link>): OPDS20ElementType
