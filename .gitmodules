@@ -1,3 +1,6 @@
 [submodule "one.irradia.opds2_0.tests/src/main/resources/one/irradia/opds2_0/tests/test-catalog"]
 	path = one.irradia.opds2_0.tests/src/main/resources/one/irradia/opds2_0/tests/test-catalog
 	url = https://github.com/opds-community/test-catalog
+[submodule ".ci"]
+	path = .ci
+	url = https://www.github.com/irradia/ci

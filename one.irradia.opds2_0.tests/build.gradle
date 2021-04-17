@@ -18,16 +18,14 @@ dependencies {
   api project(":one.irradia.opds2_0.api")
   api project(":one.irradia.opds2_0.parser.api")
   api project(":one.irradia.opds2_0.parser.vanilla")
-}
 
-configurations {
-  api.extendsFrom dependencyJUnit
-  api.extendsFrom dependencySLF4J
-  api.extendsFrom dependencyIrradiaMimeImpl
+  api libraries.junit
+  api libraries.slf4j
+  api libraries.irradia_mime_impl
 
-  implementation.extendsFrom dependencyKotlinStdlib
+  implementation libraries.kotlin_stdlib
 
-  testImplementation.extendsFrom dependencyLogback
+  testImplementation libraries.logback
 }
 
 /*

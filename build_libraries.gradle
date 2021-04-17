@@ -1,0 +1,47 @@
+/*
+ * Copyright © 2021 <code@irradia.one> http://www.irradia.one
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
+ext.libraryVersions = [
+  junit                      : "4.12",
+  android_support_test_rules : "1.0.2",
+  android_support_test_runner: "1.0.2",
+  android_test_orchestrator  : "1.0.2",
+  joda_time                  : "2.10.10",
+  irradia_mime               : "1.1.1",
+  google_guava               : "27.1-android",
+  slf4j                      : "1.8.0-beta4",
+  logback                    : "1.3.0-alpha4",
+  jackson                    : "2.11.0",
+  irradia_fieldrush          : "0.0.9"
+]
+
+ext.libraries = [
+  kotlin_reflect             : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
+  kotlin_stdlib              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+  junit                      : "junit:junit:${libraryVersions.junit}",
+  android_support_test_rules : "com.android.support.test:rules:${libraryVersions.android_support_test_rules}",
+  android_support_test_runner: "com.android.support.test:runner:${libraryVersions.android_support_test_runner}",
+  android_test_orchestrator  : "com.android.support.test:orchestrator:${libraryVersions.android_test_orchestrator}",
+  joda_time                  : "joda-time:joda-time:${libraryVersions.joda_time}",
+  irradia_mime_api           : "one.irradia.mime:one.irradia.mime.api:${libraryVersions.irradia_mime}",
+  irradia_mime_impl          : "one.irradia.mime:one.irradia.mime.vanilla:${libraryVersions.irradia_mime}",
+  google_guava               : "com.google.guava:guava:${libraryVersions.google_guava}",
+  slf4j                      : "org.slf4j:slf4j-api:${libraryVersions.slf4j}",
+  logback                    : "ch.qos.logback:logback-classic:${libraryVersions.logback}",
+  jackson                    : "com.fasterxml.jackson.core:jackson-core:${libraryVersions.jackson}",
+  irradia_fieldrush_api      : "one.irradia.fieldrush:one.irradia.fieldrush.api:${libraryVersions.irradia_fieldrush}",
+  irradia_fieldrush_impl     : "one.irradia.fieldrush:one.irradia.fieldrush.vanilla:${libraryVersions.irradia_fieldrush}"
+]

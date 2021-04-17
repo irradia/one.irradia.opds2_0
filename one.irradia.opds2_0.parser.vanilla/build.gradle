@@ -14,14 +14,12 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-configurations {
-  implementation.extendsFrom dependencyIrradiaMimeImpl
-  implementation.extendsFrom dependencyIrradiaFieldrushImpl
-  implementation.extendsFrom dependencySLF4J
-
-  api.extendsFrom dependencyJackson
-}
-
 dependencies {
   api project(":one.irradia.opds2_0.parser.api")
+
+  api libraries.jackson
+
+  implementation libraries.irradia_mime_impl
+  implementation libraries.irradia_fieldrush_impl
+  implementation libraries.slf4j
 }

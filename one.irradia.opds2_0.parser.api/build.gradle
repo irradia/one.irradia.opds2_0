@@ -14,12 +14,10 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-configurations {
-  api.extendsFrom dependencyJackson
-  api.extendsFrom dependencySLF4J
-}
-
 dependencies {
   api project(":one.irradia.opds2_0.api")
   api project(":one.irradia.opds2_0.parser.extension.spi")
+
+  api libraries.jackson
+  api libraries.slf4j
 }
