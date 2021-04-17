@@ -24,7 +24,7 @@ one.irradia.opds2_0
 Install the Android SDK.
 
 ```
-$ ./gradlew clean assembleDebug test
+$ ./gradlew clean assemble check
 ```
 
 If the above fails, it's a bug. Report it!
@@ -81,19 +81,6 @@ the freedom to use other implementations of the API if desired.
 | [one.irradia.opds2_0.tests.device](https://github.com/irradia/one.irradia.opds2_0/tree/develop/one.irradia.opds2_0.tests.device) | Unit tests that execute on real or emulated devices
 | [one.irradia.opds2_0.tests](https://github.com/irradia/one.irradia.opds2_0/tree/develop/one.irradia.opds2_0.tests) | Unit tests that can execute without needing a real or emulated device
 | [one.irradia.opds2_0.vanilla](https://github.com/irradia/one.irradia.opds2_0/tree/develop/one.irradia.opds2_0.vanilla) | Vanilla parser implementation
-
-## Publishing Releases
-
-Releases are published to Maven Central with the following invocation:
-
-```
-$ ./gradlew clean assembleDebug publish closeAndReleaseRepository
-```
-
-Consult the documentation for the [Gradle Signing plugin](https://docs.gradle.org/current/userguide/signing_plugin.html)
-and the [Gradle Nexus staging plugin](https://github.com/Codearte/gradle-nexus-staging-plugin/) for
-details on what needs to go into your `~/.gradle/gradle.properties` file to do the appropriate
-PGP signing of artifacts and uploads to Maven Central.
 
 ## Semantic Versioning
 
