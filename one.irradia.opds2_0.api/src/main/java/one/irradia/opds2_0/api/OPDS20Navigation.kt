@@ -10,4 +10,6 @@ data class OPDS20Navigation(
    * The set of navigation links.
    */
 
-  val links: List<OPDS20NavigationLink>): OPDS20ElementType
+  val links: List<OPDS20Link>
+
+) : OPDS20ElementType

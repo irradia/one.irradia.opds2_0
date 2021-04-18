@@ -16,6 +16,4 @@
 
 dependencies {
   api project(":one.irradia.opds2_0.api")
-
-  api libraries.irradia_fieldrush_api
 }

@@ -34,4 +34,12 @@ data class OPDS20Publication(
    * The table of contents for the publication.
    */
 
-  val tableOfContents: List<OPDS20Link> = listOf()): OPDS20ElementType
+  val tableOfContents: List<OPDS20Link> = listOf(),
+
+  /**
+   * The list of images associated with the publication.
+   */
+
+  val images: List<OPDS20Link> = listOf()
+
+): OPDS20ElementType

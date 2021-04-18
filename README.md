@@ -16,6 +16,7 @@ one.irradia.opds2_0
 * Extensible parser for consuming extension data inserted into feeds in a type-safe manner
 * Explicit support for registering parser extensions via [ServiceLoader](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html) 
 * Parsed feeds exposed as immutable and persistent data types for correctness and thread-safety
+* Extension module for the [Library Simplified library registry](https://libraryregistry.librarysimplified.org/)
 * ISC license
 * High coverage automated test suite
 

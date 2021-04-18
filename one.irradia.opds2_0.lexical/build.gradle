@@ -16,4 +16,5 @@
 
 dependencies {
   api libraries.kotlin_stdlib
+  api libraries.kotlin_reflect
 }

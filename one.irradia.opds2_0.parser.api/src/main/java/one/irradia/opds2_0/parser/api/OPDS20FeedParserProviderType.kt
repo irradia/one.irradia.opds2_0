@@ -11,7 +11,7 @@ interface OPDS20FeedParserProviderType {
 
   fun createParser(
     documentURI: URI,
-    stream: InputStream)
-    : OPDS20FeedParserType
+    stream: InputStream
+  ): OPDS20FeedParserType
 
 }

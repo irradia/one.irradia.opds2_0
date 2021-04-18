@@ -16,6 +16,13 @@
 
 dependencies {
   api project(":one.irradia.opds2_0.api")
+  api project(":one.irradia.opds2_0.library_simplified.api")
+  api project(":one.irradia.opds2_0.parser.extension.spi")
+  api project(":one.irradia.opds2_0.parser.vanilla")
 
-  api libraries.irradia_fieldrush_api
+  api libraries.jackson
+  api libraries.slf4j
+
+  implementation libraries.irradia_mime_impl
+  implementation libraries.irradia_fieldrush_impl
 }

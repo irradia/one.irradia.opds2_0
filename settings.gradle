@@ -1,6 +1,8 @@
 include ':one.irradia.opds2_0.api'
 include ':one.irradia.opds2_0.lexical'
+include ':one.irradia.opds2_0.library_simplified.api'
 include ':one.irradia.opds2_0.parser.api'
+include ':one.irradia.opds2_0.parser.extension.library_simplified'
 include ':one.irradia.opds2_0.parser.extension.spi'
 include ':one.irradia.opds2_0.parser.vanilla'
 include ':one.irradia.opds2_0.tests'

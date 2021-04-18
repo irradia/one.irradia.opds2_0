@@ -19,6 +19,7 @@ class OPDS20ValueParserPublication(
   : FRAbstractParserObject<OPDS20Publication>(onReceive) {
 
   private lateinit var metadata: OPDS20Metadata
+  private var images: List<OPDS20Link> = listOf()
   private var links: List<OPDS20Link> = listOf()
   private var readingOrder: List<OPDS20Link> = listOf()
 
@@ -37,6 +38,15 @@ class OPDS20ValueParserPublication(
             receiver = { links -> this.links = links })
         })
 
+    val imagesSchema =
+      FRParserObjectFieldSchema(
+        name = "images",
+        parser = {
+          FRValueParsers.forArrayMonomorphic(
+            forEach = { OPDS20ValueParserLink() },
+            receiver = { images -> this.images = images })
+        })
+
     val readingOrderSchema =
       FRParserObjectFieldSchema(
         name = "readingOrder",
@@ -48,8 +58,9 @@ class OPDS20ValueParserPublication(
         isOptional = true)
 
     return FRParserObjectSchema(listOf(
-      metadataSchema,
+      imagesSchema,
       linksSchema,
+      metadataSchema,
       readingOrderSchema
     ))
   }
@@ -58,6 +69,7 @@ class OPDS20ValueParserPublication(
     FRParseResult.succeed(OPDS20Publication(
       metadata = this.metadata,
       links = this.links,
-      readingOrder = this.readingOrder
+      readingOrder = this.readingOrder,
+      images = this.images
     ))
 }

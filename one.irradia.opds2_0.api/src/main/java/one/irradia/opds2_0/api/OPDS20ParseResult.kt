@@ -16,7 +16,15 @@ sealed class OPDS20ParseResult<T> {
      * The parsed value.
      */
 
-    val result: T) : OPDS20ParseResult<T>()
+    val result: T,
+
+    /**
+     * The list of parse warnings.
+     */
+
+    val warnings: List<OPDS20ParseWarning>
+
+  ) : OPDS20ParseResult<T>()
 
   /**
    * Parsing failed.
@@ -25,10 +33,18 @@ sealed class OPDS20ParseResult<T> {
   data class OPDS20ParseFailed<T>(
 
     /**
+     * The list of parse warnings.
+     */
+
+    val warnings: List<OPDS20ParseWarning>,
+
+    /**
      * The list of parse errors.
      */
 
-    val errors: List<OPDS20ParseError>) : OPDS20ParseResult<T>()
+    val errors: List<OPDS20ParseError>
+
+  ) : OPDS20ParseResult<T>()
 
   companion object {
 
@@ -38,10 +54,21 @@ sealed class OPDS20ParseResult<T> {
      * If r == FRParseFailed(y), return FRParseFailed(y)
      */
 
-    fun <A, B> map(x: OPDS20ParseResult<A>, f: (A) -> B): OPDS20ParseResult<B> {
+    fun <A, B> map(
+      x: OPDS20ParseResult<A>,
+      f: (A) -> B
+    ): OPDS20ParseResult<B> {
       return when (x) {
-        is OPDS20ParseSucceeded -> OPDS20ParseSucceeded(f.invoke(x.result))
-        is OPDS20ParseFailed -> OPDS20ParseFailed(x.errors)
+        is OPDS20ParseSucceeded ->
+          OPDS20ParseSucceeded(
+            result = f.invoke(x.result),
+            warnings = x.warnings
+          )
+        is OPDS20ParseFailed ->
+          OPDS20ParseFailed(
+            warnings = x.warnings,
+            errors = x.errors
+          )
       }
     }
 
@@ -51,10 +78,29 @@ sealed class OPDS20ParseResult<T> {
      * If r == FRParseFailed(y), return FRParseFailed(y)
      */
 
-    fun <A, B> flatMap(x: OPDS20ParseResult<A>, f: (A) -> OPDS20ParseResult<B>): OPDS20ParseResult<B> {
+    fun <A, B> flatMap(
+      x: OPDS20ParseResult<A>,
+      f: (A) -> OPDS20ParseResult<B>
+    ): OPDS20ParseResult<B> {
       return when (x) {
-        is OPDS20ParseSucceeded -> f.invoke(x.result)
-        is OPDS20ParseFailed -> OPDS20ParseFailed(x.errors)
+        is OPDS20ParseSucceeded ->
+          when (val result = f.invoke(x.result)) {
+            is OPDS20ParseFailed ->
+              OPDS20ParseFailed(
+                warnings = result.warnings.plus(x.warnings),
+                errors = result.errors
+              )
+            is OPDS20ParseSucceeded ->
+              OPDS20ParseSucceeded(
+                warnings = result.warnings.plus(x.warnings),
+                result = result.result
+              )
+          }
+        is OPDS20ParseFailed ->
+          OPDS20ParseFailed(
+            warnings = x.warnings,
+            errors = x.errors
+          )
       }
     }
 
@@ -63,7 +109,18 @@ sealed class OPDS20ParseResult<T> {
      */
 
     fun <A> succeed(x: A): OPDS20ParseResult<A> {
-      return OPDS20ParseSucceeded(x)
+      return OPDS20ParseSucceeded(x, warnings = listOf())
+    }
+
+    /**
+     * Construct a successful parse result.
+     */
+
+    fun <A> succeed(
+      warnings: List<OPDS20ParseWarning>,
+      x: A
+    ): OPDS20ParseResult<A> {
+      return OPDS20ParseSucceeded(x, warnings)
     }
   }
 
