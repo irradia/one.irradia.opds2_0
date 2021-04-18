@@ -1,0 +1,9 @@
+{
+  "metadata": {
+
+  },
+
+  "links": [
+    {"rel": "self", "href": "https://test.opds.io/2.0/home.json", "type": "application/opds+json"}
+  ]
+}

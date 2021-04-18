@@ -1,0 +1,9 @@
+{
+  "metadata": {
+    "title": "OPDS 2.0 Test Catalog"
+  },
+
+  "links": [
+    {"rel": "no-self", "href": "https://test.opds.io/2.0/home.json", "type": "application/opds+json"}
+  ]
+}
