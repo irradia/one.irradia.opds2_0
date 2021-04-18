@@ -25,4 +25,7 @@ dependencies {
 
   implementation libraries.irradia_mime_impl
   implementation libraries.irradia_fieldrush_impl
+
+  compileOnly libraries.osgi_bundle_annotation
+  compileOnly libraries.osgi_bundle_versioning
 }

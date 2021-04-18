@@ -16,4 +16,7 @@
 
 dependencies {
   api project(":one.irradia.opds2_0.api")
+
+  compileOnly libraries.osgi_bundle_annotation
+  compileOnly libraries.osgi_bundle_versioning
 }

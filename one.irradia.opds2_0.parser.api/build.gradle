@@ -20,4 +20,7 @@ dependencies {
 
   api libraries.jackson
   api libraries.slf4j
+
+  compileOnly libraries.osgi_bundle_annotation
+  compileOnly libraries.osgi_bundle_versioning
 }

@@ -22,4 +22,7 @@ dependencies {
   implementation libraries.irradia_mime_impl
   implementation libraries.irradia_fieldrush_impl
   implementation libraries.slf4j
+
+  compileOnly libraries.osgi_bundle_annotation
+  compileOnly libraries.osgi_bundle_versioning
 }

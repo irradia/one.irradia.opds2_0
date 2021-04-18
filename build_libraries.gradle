@@ -46,5 +46,7 @@ ext.libraries = [
   kotlin_reflect             : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
   kotlin_stdlib              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
   logback                    : "ch.qos.logback:logback-classic:${libraryVersions.logback}",
+  osgi_bundle_annotation     : "org.osgi:org.osgi.annotation.bundle:1.1.0",
+  osgi_bundle_versioning     : "org.osgi:org.osgi.annotation.versioning:1.1.1",
   slf4j                      : "org.slf4j:slf4j-api:${libraryVersions.slf4j}",
 ]
