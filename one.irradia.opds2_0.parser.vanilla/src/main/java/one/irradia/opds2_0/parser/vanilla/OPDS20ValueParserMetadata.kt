@@ -7,8 +7,10 @@ import one.irradia.fieldrush.api.FRParserObjectFieldSchema
 import one.irradia.fieldrush.api.FRParserObjectSchema
 import one.irradia.fieldrush.vanilla.FRValueParsers
 import one.irradia.opds2_0.api.OPDS20Contributor
+import one.irradia.opds2_0.api.OPDS20ExtensionElementType
 import one.irradia.opds2_0.api.OPDS20Metadata
 import one.irradia.opds2_0.api.OPDS20Title
+import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 import org.joda.time.Instant
 import java.math.BigInteger
 import java.net.URI
@@ -18,6 +20,7 @@ import java.net.URI
  */
 
 class OPDS20ValueParserMetadata(
+  private val extensions: List<OPDS20ExtensionType>,
   onReceive: (FRParserContextType, OPDS20Metadata) -> Unit = FRValueParsers.ignoringReceiverWithContext())
   : FRAbstractParserObject<OPDS20Metadata>(onReceive) {
 
@@ -31,8 +34,26 @@ class OPDS20ValueParserMetadata(
   private var sortAs: String? = null
   private var description: String = ""
   private var duration: BigInteger = BigInteger.ZERO
+  private val extensionCompletions = mutableListOf<() -> OPDS20ExtensionElementType>()
 
   override fun schema(context: FRParserContextType): FRParserObjectSchema {
+
+    /*
+     * Load any extra field schemas.
+     */
+
+    val extraFieldSchemas = mutableListOf<FRParserObjectFieldSchema<*>>()
+    for (extension in this.extensions) {
+      for (metadata in extension.metadataRoleExtension()) {
+        val extensionSchemas = metadata.createCompositeFieldExtensionSchemas(this.extensions)
+        extraFieldSchemas.addAll(extensionSchemas.objectFieldSchemas)
+        this.extensionCompletions.add(extensionSchemas.onCompletion)
+      }
+    }
+
+    /*
+     * Declare the core metadata field schemas.
+     */
 
     val identifierSchema =
       FRParserObjectFieldSchema(
@@ -97,21 +118,28 @@ class OPDS20ValueParserMetadata(
         parser = { FRValueParsers.forInteger { duration -> this.duration = duration } },
         isOptional = true)
 
-    return FRParserObjectSchema(listOf(
-      identifierSchema,
-      titleSchema,
-      subtitleSchema,
-      modifiedSchema,
-      publishedSchema,
-      languageSchema,
-      sortAsSchema,
-      authorSchema,
-      descriptionSchema,
-      durationSchema))
+    val fields = mutableListOf<FRParserObjectFieldSchema<*>>()
+    fields.add(authorSchema)
+    fields.add(descriptionSchema)
+    fields.add(durationSchema)
+    fields.add(identifierSchema)
+    fields.add(languageSchema)
+    fields.add(modifiedSchema)
+    fields.add(publishedSchema)
+    fields.add(sortAsSchema)
+    fields.add(subtitleSchema)
+    fields.add(titleSchema)
+    fields.addAll(extraFieldSchemas)
+    return FRParserObjectSchema(fields.toList())
   }
 
-  override fun onCompleted(context: FRParserContextType): FRParseResult<OPDS20Metadata> =
-    FRParseResult.succeed(OPDS20Metadata(
+  override fun onCompleted(context: FRParserContextType): FRParseResult<OPDS20Metadata> {
+    val extensionValues = mutableListOf<OPDS20ExtensionElementType>()
+    for (completion in this.extensionCompletions) {
+      extensionValues.add(completion.invoke())
+    }
+
+    return FRParseResult.succeed(OPDS20Metadata(
       title = this.title,
       identifier = this.identifier,
       subtitle = this.subtitle,
@@ -119,5 +147,8 @@ class OPDS20ValueParserMetadata(
       published = this.published,
       languages = this.languages.toList(),
       sortAs = this.sortAs ?: this.title.title,
-      author = this.authors.toList()))
+      author = this.authors.toList(),
+      extensions = extensionValues.toList()
+    ))
+  }
 }

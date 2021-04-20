@@ -1,7 +1,6 @@
-package one.irradia.opds2_0.parser.extension.library_simplified
+package one.irradia.opds2_0.parser.extension.library_simplified.internal
 
 import one.irradia.fieldrush.api.FRAbstractParserObject
-import one.irradia.fieldrush.api.FRParseError
 import one.irradia.fieldrush.api.FRParseResult
 import one.irradia.fieldrush.api.FRParserContextType
 import one.irradia.fieldrush.api.FRParserObjectFieldSchema
@@ -10,6 +9,7 @@ import one.irradia.fieldrush.vanilla.FRValueParsers
 import one.irradia.opds2_0.api.OPDS20Link
 import one.irradia.opds2_0.api.OPDS20Metadata
 import one.irradia.opds2_0.library_simplified.api.OPDS20Catalog
+import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 import one.irradia.opds2_0.parser.vanilla.OPDS20ValueParserLink
 import one.irradia.opds2_0.parser.vanilla.OPDS20ValueParserMetadata
 
@@ -18,10 +18,11 @@ import one.irradia.opds2_0.parser.vanilla.OPDS20ValueParserMetadata
  */
 
 class OPDS20CatalogValueParser(
+  private val extensions: List<OPDS20ExtensionType>,
   onReceive: (FRParserContextType, OPDS20Catalog) -> Unit = FRValueParsers.ignoringReceiverWithContext())
   : FRAbstractParserObject<OPDS20Catalog>(onReceive) {
 
-  private lateinit var links: List<OPDS20Link>
+  private var links: List<OPDS20Link> = listOf()
   private lateinit var metadata: OPDS20Metadata
 
   override fun schema(context: FRParserContextType): FRParserObjectSchema {
@@ -29,7 +30,7 @@ class OPDS20CatalogValueParser(
       FRParserObjectFieldSchema(
         name = "metadata",
         parser = {
-          OPDS20ValueParserMetadata { _, meta -> this.metadata = meta }
+          OPDS20ValueParserMetadata(this.extensions) { _, meta -> this.metadata = meta }
         }
       )
 
