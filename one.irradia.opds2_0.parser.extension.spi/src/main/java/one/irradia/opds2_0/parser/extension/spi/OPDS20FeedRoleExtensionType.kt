@@ -10,22 +10,11 @@ import one.irradia.opds2_0.api.OPDS20ExtensionElementType
 interface OPDS20FeedRoleExtensionType<T : OPDS20ExtensionElementType> {
 
   /**
-   * The name of the extension
-   */
-
-  val name: String
-
-  /**
-   * The version of the extension
-   */
-
-  val version: String
-
-  /**
    * @return A parser for the top-level object
    */
 
   fun createObjectFieldSchema(
+    extensions: List<OPDS20ExtensionType>,
     receiver: (T) -> Unit
   ): FRParserObjectFieldSchema<T>
 }

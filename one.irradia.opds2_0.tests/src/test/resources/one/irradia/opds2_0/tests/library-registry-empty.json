@@ -1,0 +1,15 @@
+{
+   "catalogs": [
+
+   ],
+   "metadata": {
+      "title": "Something"
+   },
+   "links": [
+      {
+         "href" : "https://libraryregistry.librarysimplified.org/libraries",
+         "rel" : "self",
+         "type" : "application/opds+json"
+      }
+   ]
+}

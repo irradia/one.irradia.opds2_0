@@ -12,12 +12,14 @@ import one.irradia.opds2_0.api.OPDS20Link
 import one.irradia.opds2_0.api.OPDS20Metadata
 import one.irradia.opds2_0.api.OPDS20Navigation
 import one.irradia.opds2_0.api.OPDS20Publication
+import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 
 /**
  * An OPDS 2.0 group parser.
  */
 
 class OPDS20ValueParserGroup(
+  private val extensions: List<OPDS20ExtensionType>,
   onReceive: (FRParserContextType, OPDS20Group) -> Unit = FRValueParsers.ignoringReceiverWithContext())
   : FRAbstractParserObject<OPDS20Group>(onReceive) {
 
@@ -31,7 +33,7 @@ class OPDS20ValueParserGroup(
       FRParserObjectFieldSchema(
         name = "metadata",
         parser = {
-          OPDS20ValueParserMetadata { _, meta -> this.metadata = meta }
+          OPDS20ValueParserMetadata(this.extensions) { _, meta -> this.metadata = meta }
         }
       )
 
@@ -64,7 +66,7 @@ class OPDS20ValueParserGroup(
         name = "publications",
         parser = {
           FRValueParsers.forArrayMonomorphic(
-            forEach = { OPDS20ValueParserPublication() },
+            forEach = { OPDS20ValueParserPublication(this.extensions) },
             receiver = { publications -> this.publications = publications }
           )
         },

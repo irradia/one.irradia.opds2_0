@@ -9,12 +9,14 @@ import one.irradia.fieldrush.vanilla.FRValueParsers
 import one.irradia.opds2_0.api.OPDS20Link
 import one.irradia.opds2_0.api.OPDS20Metadata
 import one.irradia.opds2_0.api.OPDS20Publication
+import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 
 /**
  * An OPDS 2.0 publication section parser.
  */
 
 class OPDS20ValueParserPublication(
+  private val extensions: List<OPDS20ExtensionType>,
   onReceive: (FRParserContextType, OPDS20Publication) -> Unit = FRValueParsers.ignoringReceiverWithContext())
   : FRAbstractParserObject<OPDS20Publication>(onReceive) {
 
@@ -27,7 +29,7 @@ class OPDS20ValueParserPublication(
     val metadataSchema =
       FRParserObjectFieldSchema(
         name = "metadata",
-        parser = { OPDS20ValueParserMetadata { _, meta -> this.metadata = meta } })
+        parser = { OPDS20ValueParserMetadata(this.extensions) { _, meta -> this.metadata = meta } })
 
     val linksSchema =
       FRParserObjectFieldSchema(

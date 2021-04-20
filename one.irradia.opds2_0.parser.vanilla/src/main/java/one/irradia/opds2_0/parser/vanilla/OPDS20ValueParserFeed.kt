@@ -14,17 +14,18 @@ import one.irradia.opds2_0.api.OPDS20Link
 import one.irradia.opds2_0.api.OPDS20Metadata
 import one.irradia.opds2_0.api.OPDS20Navigation
 import one.irradia.opds2_0.api.OPDS20Publication
+import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 
 /**
  * An OPDS 2.0 feed parser.
  */
 
 class OPDS20ValueParserFeed(
-  private val extensions: OPDS20FeedParserExtensions,
+  private val extensions: List<OPDS20ExtensionType>,
   onReceive: (FRParserContextType, OPDS20Feed) -> Unit = FRValueParsers.ignoringReceiverWithContext())
   : FRAbstractParserObject<OPDS20Feed>(onReceive) {
 
-  private lateinit var links: List<OPDS20Link>
+  private var links: List<OPDS20Link> = listOf()
   private lateinit var metadata: OPDS20Metadata
   private var groups: List<OPDS20Group> = listOf()
   private var navigation: List<OPDS20Link> = listOf()
@@ -35,19 +36,29 @@ class OPDS20ValueParserFeed(
     context: FRParserContextType
   ): FRParserObjectSchema {
 
+    /**
+     * Enable any feed role extensions.
+     */
+
     val extensionSchemas = mutableListOf<FRParserObjectFieldSchema<*>>()
-    for (extension in this.extensions.feedRoleExtensions) {
-      val extensionSchema = extension.createObjectFieldSchema { e ->
-        this.extensionElements.add(e)
+    for (extension in this.extensions) {
+      for (feedRoleExtension in extension.feedRoleExtensions()) {
+        val extensionSchema = feedRoleExtension.createObjectFieldSchema(this.extensions) { e ->
+          this.extensionElements.add(e)
+        }
+        extensionSchemas.add(extensionSchema)
       }
-      extensionSchemas.add(extensionSchema)
     }
+
+    /**
+     * Declare the core field schemas.
+     */
 
     val metadataSchema =
       FRParserObjectFieldSchema(
         name = "metadata",
         parser = {
-          OPDS20ValueParserMetadata { _, meta -> this.metadata = meta }
+          OPDS20ValueParserMetadata(this.extensions) { _, meta -> this.metadata = meta }
         }
       )
 
@@ -68,7 +79,7 @@ class OPDS20ValueParserFeed(
         name = "groups",
         parser = {
           FRValueParsers.forArrayMonomorphic(
-            forEach = { OPDS20ValueParserGroup() },
+            forEach = { OPDS20ValueParserGroup(this.extensions) },
             receiver = { groups -> this.groups = groups }
           )
         },
@@ -92,7 +103,7 @@ class OPDS20ValueParserFeed(
         name = "publications",
         parser = {
           FRValueParsers.forArrayMonomorphic(
-            forEach = { OPDS20ValueParserPublication() },
+            forEach = { OPDS20ValueParserPublication(this.extensions) },
             receiver = { publications -> this.publications = publications }
           )
         },

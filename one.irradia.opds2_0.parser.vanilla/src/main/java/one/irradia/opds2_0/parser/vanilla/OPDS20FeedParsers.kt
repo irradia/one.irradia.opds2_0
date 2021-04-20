@@ -3,6 +3,7 @@ package one.irradia.opds2_0.parser.vanilla
 import one.irradia.fieldrush.vanilla.FRParsers
 import one.irradia.opds2_0.parser.api.OPDS20FeedParserProviderType
 import one.irradia.opds2_0.parser.api.OPDS20FeedParserType
+import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 import java.io.InputStream
 import java.net.URI
 
@@ -11,7 +12,7 @@ import java.net.URI
  */
 
 class OPDS20FeedParsers private constructor(
-  private val extensions: OPDS20FeedParserExtensions
+  private val extensions: List<OPDS20ExtensionType>,
 ) : OPDS20FeedParserProviderType {
 
   private val parsers = FRParsers()
@@ -23,7 +24,7 @@ class OPDS20FeedParsers private constructor(
      */
 
     fun createWithoutExtensions(): OPDS20FeedParserProviderType {
-      return OPDS20FeedParsers(OPDS20FeedParserExtensions())
+      return OPDS20FeedParsers(listOf())
     }
 
     /**
@@ -31,7 +32,7 @@ class OPDS20FeedParsers private constructor(
      */
 
     fun createWithExtensions(
-      extensions: OPDS20FeedParserExtensions
+      extensions: List<OPDS20ExtensionType>
     ): OPDS20FeedParserProviderType {
       return OPDS20FeedParsers(extensions)
     }

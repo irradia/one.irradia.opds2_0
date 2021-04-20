@@ -55,7 +55,15 @@ data class OPDS20Metadata(
    * The authors.
    */
 
-  val author: List<OPDS20Contributor>): Comparable<OPDS20Metadata>, OPDS20ElementType {
+  val author: List<OPDS20Contributor>,
+
+  /**
+   * The extension elements
+   */
+
+  val extensions: List<OPDS20ExtensionElementType>
+
+) : Comparable<OPDS20Metadata>, OPDS20ElementType {
 
   override fun compareTo(other: OPDS20Metadata): Int =
     (this.sortAs ?: this.title.title).compareTo(other.sortAs ?: other.title.title)
