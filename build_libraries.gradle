@@ -21,7 +21,7 @@ ext.libraryVersions = [
   android_support_test_runner: "1.0.2",
   android_test_orchestrator  : "1.0.2",
   google_guava               : "27.1-android",
-  irradia_fieldrush          : "0.0.15",
+  irradia_fieldrush          : "0.0.16",
   irradia_mime               : "1.1.1",
   jackson                    : "2.11.0",
   joda_time                  : "2.10.10",

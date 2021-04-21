@@ -113,5 +113,6 @@ class OPDS20ParsersVanillaTest {
     val extras = catalog.metadata.extensions.find { it is OPDS20CatalogMetadata } as OPDS20CatalogMetadata
     assertTrue(extras.isAutomatic)
     assertTrue(extras.isProduction)
+    assertEquals(URI.create("urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04"), extras.id)
   }
 }

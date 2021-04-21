@@ -1,6 +1,6 @@
 package one.irradia.opds2_0.api
 
-import org.joda.time.Instant
+import org.joda.time.DateTime
 import java.net.URI
 
 /**
@@ -31,13 +31,13 @@ data class OPDS20Metadata(
    * The time the publication was last modified.
    */
 
-  val modified: Instant?,
+  val modified: DateTime?,
 
   /**
    * The time the publication was published.
    */
 
-  val published: Instant?,
+  val published: DateTime?,
 
   /**
    * The languages that apply to the publication.

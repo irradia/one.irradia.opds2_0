@@ -1,21 +1,22 @@
 {
-   "catalogs": [
-      {
-         "metadata": {
-            "title": "Auto Production",
-            "isAutomatic": true,
-            "isProduction": true
-         }
+  "catalogs": [
+    {
+      "metadata": {
+        "title": "Auto Production",
+        "isAutomatic": true,
+        "isProduction": true,
+        "id": "urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04"
       }
-   ],
-   "metadata": {
-      "title": "Something"
-   },
-   "links": [
-      {
-         "href" : "https://libraryregistry.librarysimplified.org/libraries",
-         "rel" : "self",
-         "type" : "application/opds+json"
-      }
-   ]
+    }
+  ],
+  "metadata": {
+    "title": "Something"
+  },
+  "links": [
+    {
+      "href": "https://libraryregistry.librarysimplified.org/libraries",
+      "rel": "self",
+      "type": "application/opds+json"
+    }
+  ]
 }
