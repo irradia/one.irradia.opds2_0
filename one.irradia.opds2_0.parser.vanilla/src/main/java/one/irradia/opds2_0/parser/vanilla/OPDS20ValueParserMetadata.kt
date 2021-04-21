@@ -11,6 +11,8 @@ import one.irradia.opds2_0.api.OPDS20ExtensionElementType
 import one.irradia.opds2_0.api.OPDS20Metadata
 import one.irradia.opds2_0.api.OPDS20Title
 import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import org.joda.time.Instant
 import java.math.BigInteger
 import java.net.URI
@@ -28,8 +30,8 @@ class OPDS20ValueParserMetadata(
   private val authors: MutableList<OPDS20Contributor> = mutableListOf()
   private var identifier: URI? = null
   private var subtitle: OPDS20Title? = null
-  private var modified: Instant? = null
-  private var published: Instant? = null
+  private var modified: DateTime? = null
+  private var published: DateTime? = null
   private val languages: MutableList<String> = mutableListOf()
   private var sortAs: String? = null
   private var description: String = ""
@@ -75,13 +77,13 @@ class OPDS20ValueParserMetadata(
     val modifiedSchema =
       FRParserObjectFieldSchema(
         name = "modified",
-        parser = { FRValueParsers.forTimestamp { modified -> this.modified = modified } },
+        parser = { FRValueParsers.forDateTimeUTC { modified -> this.modified = modified } },
         isOptional = true)
 
     val publishedSchema =
       FRParserObjectFieldSchema(
         name = "published",
-        parser = { FRValueParsers.forTimestamp { published -> this.published = published } },
+        parser = { FRValueParsers.forDateTimeUTC { published -> this.published = published } },
         isOptional = true)
 
     val languageSchema =

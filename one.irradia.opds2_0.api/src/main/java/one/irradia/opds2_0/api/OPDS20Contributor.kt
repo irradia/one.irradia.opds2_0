@@ -30,8 +30,8 @@ data class OPDS20Contributor(
    * The contributor links.
    */
 
-  val links: List<OPDS20Link> = listOf()) : Comparable<OPDS20Contributor> {
-
+  val links: List<OPDS20Link> = listOf()
+) : Comparable<OPDS20Contributor> {
   override fun compareTo(other: OPDS20Contributor): Int {
     return this.sortAs.compareTo(other.sortAs)
   }
