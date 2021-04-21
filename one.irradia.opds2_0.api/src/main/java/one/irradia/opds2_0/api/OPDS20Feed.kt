@@ -50,4 +50,13 @@ data class OPDS20Feed(
 
   val extensions: List<OPDS20ExtensionElementType>
 
-) : OPDS20ElementType
+) : OPDS20ElementType {
+
+  /**
+   * Find the first registered extension with the given type, or `null` if there isn't one.
+   */
+
+  fun <T : OPDS20ExtensionElementType> extensionOf(classType: Class<T>): T? {
+    return this.extensions.filterIsInstance(classType).firstOrNull()
+  }
+}

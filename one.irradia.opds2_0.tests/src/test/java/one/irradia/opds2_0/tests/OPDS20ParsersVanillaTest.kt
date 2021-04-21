@@ -7,9 +7,11 @@ import one.irradia.opds2_0.parser.api.OPDS20FeedParserProviderType
 import one.irradia.opds2_0.parser.extension.library_simplified.OPDS20CatalogExtension
 import one.irradia.opds2_0.parser.vanilla.OPDS20FeedParsers
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.slf4j.LoggerFactory
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -71,6 +73,13 @@ class OPDS20ParsersVanillaTest {
     for (catalog in catalogs.catalogs) {
       this.logger.debug("{}", catalog.metadata.title.title)
     }
+
+    assertAll(catalogs.catalogs.map {
+      {
+        val catalogMetadata = it.metadata.extensionOf(OPDS20CatalogMetadata::class.java)!!
+        assertNotNull(catalogMetadata.updated)
+      }
+    })
   }
 
   @Test

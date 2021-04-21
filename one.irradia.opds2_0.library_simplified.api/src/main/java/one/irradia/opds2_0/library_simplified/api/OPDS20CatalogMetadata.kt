@@ -1,6 +1,7 @@
 package one.irradia.opds2_0.library_simplified.api
 
 import one.irradia.opds2_0.api.OPDS20ExtensionElementType
+import org.joda.time.DateTime
 import java.net.URI
 
 /**
@@ -11,5 +12,6 @@ data class OPDS20CatalogMetadata(
   val isProduction: Boolean,
   val isAutomatic: Boolean,
   val adobeVendorId: String?,
+  val updated: DateTime?,
   val id: URI?
 ) : OPDS20ExtensionElementType
