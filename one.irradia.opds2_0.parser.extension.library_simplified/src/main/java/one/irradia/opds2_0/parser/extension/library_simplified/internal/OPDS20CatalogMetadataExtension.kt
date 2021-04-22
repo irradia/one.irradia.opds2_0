@@ -5,6 +5,7 @@ import one.irradia.fieldrush.vanilla.FRValueParsers
 import one.irradia.opds2_0.library_simplified.api.OPDS20CatalogMetadata
 import one.irradia.opds2_0.parser.extension.spi.OPDS20ExtensionType
 import one.irradia.opds2_0.parser.extension.spi.OPDS20MetadataRoleExtensionType
+import org.joda.time.DateTime
 import java.net.URI
 
 /**
@@ -13,10 +14,14 @@ import java.net.URI
 
 class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20CatalogMetadata> {
 
-  private var id: URI? = null
   private var adobeVendorId: String? = null
-  private var isProduction: Boolean = false
+  private var distance: String? = null
+  private var id: URI? = null
   private var isAutomatic: Boolean = false
+  private var isProduction: Boolean = false
+  private var libraryType: String? = null
+  private var location: String? = null
+  private var updated: DateTime? = null
 
   override fun createCompositeFieldExtensionSchemas(
     extensions: List<OPDS20ExtensionType>
@@ -49,6 +54,13 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
         isOptional = true
       )
 
+    val updatedSchema =
+      FRParserObjectFieldSchema(
+        name = "updated",
+        parser = { FRValueParsers.forDateTimeUTC { updated -> this.updated = updated } },
+        isOptional = true
+      )
+
     val isProductionSchema =
       FRParserObjectFieldSchema(
         name = "isProduction",
@@ -58,19 +70,54 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
         isOptional = true
       )
 
+    val locationSchema =
+      FRParserObjectFieldSchema(
+        name = "location",
+        parser = {
+          FRValueParsers.forString { this.location = it }
+        },
+        isOptional = true
+      )
+
+    val distanceSchema =
+      FRParserObjectFieldSchema(
+        name = "distance",
+        parser = {
+          FRValueParsers.forString { this.distance = it }
+        },
+        isOptional = true
+      )
+
+    val libraryTypeSchema =
+      FRParserObjectFieldSchema(
+        name = "library_type",
+        parser = {
+          FRValueParsers.forString { this.libraryType = it }
+        },
+        isOptional = true
+      )
+
     return OPDS20MetadataRoleExtensionType.ExtensionSchemas(
       objectFieldSchemas = listOf(
+        adobeVendorIdSchema,
+        distanceSchema,
+        idSchema,
         isAutomaticSchema,
         isProductionSchema,
-        adobeVendorIdSchema,
-        idSchema
+        libraryTypeSchema,
+        locationSchema,
+        updatedSchema,
       ),
       onCompletion = {
         OPDS20CatalogMetadata(
           adobeVendorId = this.adobeVendorId,
+          distance = this.distance,
           id = this.id,
           isAutomatic = this.isAutomatic,
-          isProduction = this.isProduction
+          isProduction = this.isProduction,
+          libraryType = this.libraryType,
+          location = this.location,
+          updated = this.updated,
         )
       }
     )

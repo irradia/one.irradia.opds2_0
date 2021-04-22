@@ -7,9 +7,11 @@ import one.irradia.opds2_0.parser.api.OPDS20FeedParserProviderType
 import one.irradia.opds2_0.parser.extension.library_simplified.OPDS20CatalogExtension
 import one.irradia.opds2_0.parser.vanilla.OPDS20FeedParsers
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.slf4j.LoggerFactory
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -71,6 +73,13 @@ class OPDS20ParsersVanillaTest {
     for (catalog in catalogs.catalogs) {
       this.logger.debug("{}", catalog.metadata.title.title)
     }
+
+    assertAll(catalogs.catalogs.map {
+      {
+        val catalogMetadata = it.metadata.extensionOf(OPDS20CatalogMetadata::class.java)!!
+        assertNotNull(catalogMetadata.updated)
+      }
+    })
   }
 
   @Test
@@ -113,6 +122,32 @@ class OPDS20ParsersVanillaTest {
     val extras = catalog.metadata.extensions.find { it is OPDS20CatalogMetadata } as OPDS20CatalogMetadata
     assertTrue(extras.isAutomatic)
     assertTrue(extras.isProduction)
+    assertEquals(URI.create("urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04"), extras.id)
+  }
+
+  @Test
+  fun testLibraryRegistryExtendedLocation() {
+    val parser =
+      this.parsers.createParser(
+        documentURI = URI.create("urn:test"),
+        stream = resource("library-registry-extended-location.json"))
+
+    val result = parser.parse()
+    this.dumpParseResult(result)
+
+    val success = result as OPDS20ParseResult.OPDS20ParseSucceeded
+    assertEquals(0, success.warnings.size)
+
+    val feed = success.result
+    val catalogs = feed.extensionOf(OPDS20CatalogList::class.java)!!
+    val catalog = catalogs.catalogs[0]
+    assertEquals("Auto Production", catalog.metadata.title.title)
+    val extras = catalog.metadata.extensionOf(OPDS20CatalogMetadata::class.java)!!
+    assertTrue(extras.isAutomatic)
+    assertTrue(extras.isProduction)
+    assertEquals("40.753141642210466, -73.98229631746968", extras.location)
+    assertEquals("128 km", extras.distance)
+    assertEquals("universal", extras.libraryType)
     assertEquals(URI.create("urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04"), extras.id)
   }
 }

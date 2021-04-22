@@ -68,4 +68,11 @@ data class OPDS20Metadata(
   override fun compareTo(other: OPDS20Metadata): Int =
     (this.sortAs ?: this.title.title).compareTo(other.sortAs ?: other.title.title)
 
+  /**
+   * Find the first registered extension with the given type, or `null` if there isn't one.
+   */
+
+  fun <T : OPDS20ExtensionElementType> extensionOf(classType: Class<T>): T? {
+    return this.extensions.filterIsInstance(classType).firstOrNull()
+  }
 }
