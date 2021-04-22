@@ -61,6 +61,14 @@ data class OPDS20CatalogMetadata(
    * @see "https://github.com/NYPL-Simplified/Simplified/wiki/LibraryRegistryPublicAPI#the-distance-property"
    */
 
-  val distance: String?
+  val distance: String?,
+
+  /**
+   * Library Simplified catalogs use a "library_type" property to describe library services.
+   *
+   * @see "https://github.com/NYPL-Simplified/Simplified/wiki/LibraryRegistryPublicAPI#the-library_type-property"
+   */
+
+  val libraryType: String?
 
 ) : OPDS20ExtensionElementType

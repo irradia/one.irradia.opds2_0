@@ -7,7 +7,8 @@
         "isProduction": true,
         "id": "urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04",
         "location": "40.753141642210466, -73.98229631746968",
-        "distance": "128 km"
+        "distance": "128 km",
+        "library_type": "universal"
       }
     }
   ],

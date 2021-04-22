@@ -147,6 +147,7 @@ class OPDS20ParsersVanillaTest {
     assertTrue(extras.isProduction)
     assertEquals("40.753141642210466, -73.98229631746968", extras.location)
     assertEquals("128 km", extras.distance)
+    assertEquals("universal", extras.libraryType)
     assertEquals(URI.create("urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04"), extras.id)
   }
 }

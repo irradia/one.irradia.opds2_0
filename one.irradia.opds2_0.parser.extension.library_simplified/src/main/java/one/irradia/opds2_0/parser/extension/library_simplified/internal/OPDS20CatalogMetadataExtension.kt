@@ -14,12 +14,13 @@ import java.net.URI
 
 class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20CatalogMetadata> {
 
-  private var distance: String? = null
-  private var location: String? = null
   private var adobeVendorId: String? = null
+  private var distance: String? = null
   private var id: URI? = null
   private var isAutomatic: Boolean = false
   private var isProduction: Boolean = false
+  private var libraryType: String? = null
+  private var location: String? = null
   private var updated: DateTime? = null
 
   override fun createCompositeFieldExtensionSchemas(
@@ -87,6 +88,15 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
         isOptional = true
       )
 
+    val libraryTypeSchema =
+      FRParserObjectFieldSchema(
+        name = "library_type",
+        parser = {
+          FRValueParsers.forString { this.libraryType = it }
+        },
+        isOptional = true
+      )
+
     return OPDS20MetadataRoleExtensionType.ExtensionSchemas(
       objectFieldSchemas = listOf(
         adobeVendorIdSchema,
@@ -94,6 +104,7 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
         idSchema,
         isAutomaticSchema,
         isProductionSchema,
+        libraryTypeSchema,
         locationSchema,
         updatedSchema,
       ),
@@ -104,6 +115,7 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
           id = this.id,
           isAutomatic = this.isAutomatic,
           isProduction = this.isProduction,
+          libraryType = this.libraryType,
           location = this.location,
           updated = this.updated,
         )
