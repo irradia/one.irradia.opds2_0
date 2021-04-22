@@ -14,6 +14,8 @@ import java.net.URI
 
 class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20CatalogMetadata> {
 
+  private var distance: String? = null
+  private var location: String? = null
   private var adobeVendorId: String? = null
   private var id: URI? = null
   private var isAutomatic: Boolean = false
@@ -67,21 +69,43 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
         isOptional = true
       )
 
+    val locationSchema =
+      FRParserObjectFieldSchema(
+        name = "location",
+        parser = {
+          FRValueParsers.forString { this.location = it }
+        },
+        isOptional = true
+      )
+
+    val distanceSchema =
+      FRParserObjectFieldSchema(
+        name = "distance",
+        parser = {
+          FRValueParsers.forString { this.distance = it }
+        },
+        isOptional = true
+      )
+
     return OPDS20MetadataRoleExtensionType.ExtensionSchemas(
       objectFieldSchemas = listOf(
+        adobeVendorIdSchema,
+        distanceSchema,
+        idSchema,
         isAutomaticSchema,
         isProductionSchema,
-        adobeVendorIdSchema,
+        locationSchema,
         updatedSchema,
-        idSchema
       ),
       onCompletion = {
         OPDS20CatalogMetadata(
           adobeVendorId = this.adobeVendorId,
+          distance = this.distance,
           id = this.id,
           isAutomatic = this.isAutomatic,
           isProduction = this.isProduction,
-          updated = this.updated
+          location = this.location,
+          updated = this.updated,
         )
       }
     )
