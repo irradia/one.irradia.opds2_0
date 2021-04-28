@@ -1,0 +1,73 @@
+{
+  "metadata" : {
+    "title" : "Libraries near 40.7769,-73.9813"
+  },
+  "links": [
+    {
+      "href": "http://www.example.com",
+      "rel": "self"
+    }
+  ],
+  "catalogs": [
+    {
+      "metadata": {
+        "title": "Brooklyn Public Library",
+        "identifier": "urn:uuid:edef2358-9f6a-4ce6-b64f-9b351ec68ac4",
+        "modified": "2021-01-12T17:48:06Z",
+        "schema:distance": "14 km.",
+        "schema:areaServed": "Kings County, NY",
+        "subject" : [
+          {
+            "name" : "Local library",
+            "scheme" : "http://librarysimplified.org/terms/library-types",
+            "code" : "local"
+          }
+        ]
+      },
+
+      "images": [
+        {
+          "href": "data:image/png,...",
+          "type": "image/png",
+          "height": 200,
+          "width": 200
+        }
+      ],
+
+      "links": [
+        {
+          "href": "https://bplsimplye.bklynlibrary.org/NYBKLYN/",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition",
+          "rel": "http://opds-spec.org/catalog"
+        },
+        {
+          "href": "https://bplsimplye.bklynlibrary.org/NYBKLYN/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "href": "https://www.bklynlibrary.org/",
+          "type": "text/html",
+          "rel": "alternate"
+        },
+        {
+          "href": "https://libraryregistry.librarysimplified.org/library/urn:uuid:edef2358-9f6a-4ce6-b64f-9b351ec68ac4/eligibility",
+          "type": "application/geo+json",
+          "rel": "http://librarysimplified.org/rel/registry/eligibility"
+        },
+        {
+          "href": "https://libraryregistry.librarysimplified.org/library/urn:uuid:edef2358-9f6a-4ce6-b64f-9b351ec68ac4/focus",
+          "type": "application/geo+json",
+          "rel": "http://librarysimplified.org/rel/registry/focus"
+        },
+        {
+          "href": "mailto:askus@bklynlibrary.org",
+          "rel": "http://librarysimplified.org/rel/designated-agent/copyright"
+        },
+        {
+          "href": "mailto:askus@bklynlibrary.org",
+          "rel": "help"
+        }
+      ]
+    }
+  ]
+}

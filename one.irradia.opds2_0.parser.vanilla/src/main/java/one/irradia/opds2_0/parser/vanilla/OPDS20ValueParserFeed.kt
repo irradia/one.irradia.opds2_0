@@ -25,12 +25,13 @@ class OPDS20ValueParserFeed(
   onReceive: (FRParserContextType, OPDS20Feed) -> Unit = FRValueParsers.ignoringReceiverWithContext())
   : FRAbstractParserObject<OPDS20Feed>(onReceive) {
 
-  private var links: List<OPDS20Link> = listOf()
   private lateinit var metadata: OPDS20Metadata
+  private val extensionElements = mutableListOf<OPDS20ExtensionElementType>()
   private var groups: List<OPDS20Group> = listOf()
+  private var images: List<OPDS20Link> = listOf()
+  private var links: List<OPDS20Link> = listOf()
   private var navigation: List<OPDS20Link> = listOf()
   private var publications: List<OPDS20Publication> = listOf()
-  private val extensionElements = mutableListOf<OPDS20ExtensionElementType>()
 
   override fun schema(
     context: FRParserContextType
@@ -69,6 +70,18 @@ class OPDS20ValueParserFeed(
           FRValueParsers.forArrayMonomorphic(
             forEach = { OPDS20ValueParserLink() },
             receiver = { links -> this.links = links }
+          )
+        },
+        isOptional = true
+      )
+
+    val imagesSchema =
+      FRParserObjectFieldSchema(
+        name = "images",
+        parser = {
+          FRValueParsers.forArrayMonomorphic(
+            forEach = { OPDS20ValueParserLink() },
+            receiver = { images -> this.images = images }
           )
         },
         isOptional = true
@@ -113,6 +126,7 @@ class OPDS20ValueParserFeed(
     val fields = mutableListOf<FRParserObjectFieldSchema<*>>()
     fields.add(groupsSchema)
     fields.add(linksSchema)
+    fields.add(imagesSchema)
     fields.add(metadataSchema)
     fields.add(navigationSchema)
     fields.add(publicationsSchema)
@@ -140,6 +154,7 @@ class OPDS20ValueParserFeed(
       FRParseResult.succeed(OPDS20Feed(
         groups = this.groups,
         links = this.links,
+        images = this.images,
         metadata = this.metadata,
         navigation = feedNavigation,
         publications = this.publications,
