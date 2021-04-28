@@ -45,6 +45,12 @@ data class OPDS20Feed(
   val links: List<OPDS20Link>,
 
   /**
+   * The feed images
+   */
+
+  val images: List<OPDS20Link>,
+
+  /**
    * The extension elements
    */
 

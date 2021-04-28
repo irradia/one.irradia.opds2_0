@@ -23,6 +23,7 @@ class OPDS20CatalogValueParser(
   : FRAbstractParserObject<OPDS20Catalog>(onReceive) {
 
   private var links: List<OPDS20Link> = listOf()
+  private var images: List<OPDS20Link> = listOf()
   private lateinit var metadata: OPDS20Metadata
 
   override fun schema(context: FRParserContextType): FRParserObjectSchema {
@@ -46,8 +47,21 @@ class OPDS20CatalogValueParser(
         isOptional = true
       )
 
+    val imagesSchema =
+      FRParserObjectFieldSchema(
+        name = "images",
+        parser = {
+          FRValueParsers.forArrayMonomorphic(
+            forEach = { OPDS20ValueParserLink() },
+            receiver = { images -> this.images = images }
+          )
+        },
+        isOptional = true
+      )
+
     return FRParserObjectSchema(listOf(
       linksSchema,
+      imagesSchema,
       metadataSchema
     ))
   }
@@ -55,6 +69,7 @@ class OPDS20CatalogValueParser(
   override fun onCompleted(context: FRParserContextType): FRParseResult<OPDS20Catalog> {
     return FRParseResult.succeed(OPDS20Catalog(
       links = this.links,
+      images = this.images,
       metadata = this.metadata
     ))
   }

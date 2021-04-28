@@ -145,9 +145,57 @@ class OPDS20ParsersVanillaTest {
     val extras = catalog.metadata.extensionOf(OPDS20CatalogMetadata::class.java)!!
     assertTrue(extras.isAutomatic)
     assertTrue(extras.isProduction)
-    assertEquals("40.753141642210466, -73.98229631746968", extras.location)
+    assertEquals("40.753141642210466, -73.98229631746968", extras.areaServed)
     assertEquals("128 km", extras.distance)
-    assertEquals("universal", extras.libraryType)
     assertEquals(URI.create("urn:uuid:25cb02b7-4431-4c86-b1b7-7dcbda353e04"), extras.id)
+  }
+
+  @Test
+  fun testSample0() {
+    val parser =
+      this.parsers.createParser(
+        documentURI = URI.create("urn:test"),
+        stream = resource("sample-0.json"))
+
+    val result = parser.parse()
+    this.dumpParseResult(result)
+
+    val success = result as OPDS20ParseResult.OPDS20ParseSucceeded
+    assertEquals(0, success.warnings.size)
+  }
+
+  @Test
+  fun testSample0Unparseable() {
+    val parser =
+      this.parsers.createParser(
+        documentURI = URI.create("urn:test"),
+        stream = resource("sample-0-unparseable.json"))
+
+    val result = parser.parse()
+    this.dumpParseResult(result)
+
+    val failed = result as OPDS20ParseResult.OPDS20ParseFailed
+    assertEquals(0, failed.warnings.size)
+    assertEquals(3, failed.errors.size)
+  }
+
+  @Test
+  fun testSample1() {
+    val parser =
+      this.parsers.createParser(
+        documentURI = URI.create("urn:test"),
+        stream = resource("sample-1.json"))
+
+    val result = parser.parse()
+    this.dumpParseResult(result)
+
+    val success = result as OPDS20ParseResult.OPDS20ParseSucceeded
+    assertEquals(0, success.warnings.size)
+
+    val catalogs = success.result.extensionOf(OPDS20CatalogList::class.java)!!
+    val catalog = catalogs.catalogs[0]
+    val catalogMeta = catalog.metadata.extensionOf(OPDS20CatalogMetadata::class.java)
+    assertEquals("14 km.", catalogMeta!!.distance)
+    assertEquals("Kings County, NY", catalogMeta.areaServed)
   }
 }

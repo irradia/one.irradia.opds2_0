@@ -14,13 +14,11 @@ import java.net.URI
 
 class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20CatalogMetadata> {
 
-  private var adobeVendorId: String? = null
   private var distance: String? = null
   private var id: URI? = null
   private var isAutomatic: Boolean = false
   private var isProduction: Boolean = false
-  private var libraryType: String? = null
-  private var location: String? = null
+  private var areaServed: String? = null
   private var updated: DateTime? = null
 
   override fun createCompositeFieldExtensionSchemas(
@@ -45,15 +43,6 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
         isOptional = true
       )
 
-    val adobeVendorIdSchema =
-      FRParserObjectFieldSchema(
-        name = "adobe_vendor_id",
-        parser = {
-          FRValueParsers.forString { this.adobeVendorId = it }
-        },
-        isOptional = true
-      )
-
     val updatedSchema =
       FRParserObjectFieldSchema(
         name = "updated",
@@ -72,51 +61,38 @@ class OPDS20CatalogMetadataExtension : OPDS20MetadataRoleExtensionType<OPDS20Cat
 
     val locationSchema =
       FRParserObjectFieldSchema(
-        name = "location",
+        name = "schema:areaServed",
         parser = {
-          FRValueParsers.forString { this.location = it }
+          FRValueParsers.forString { this.areaServed = it }
         },
         isOptional = true
       )
 
     val distanceSchema =
       FRParserObjectFieldSchema(
-        name = "distance",
+        name = "schema:distance",
         parser = {
           FRValueParsers.forString { this.distance = it }
         },
         isOptional = true
       )
 
-    val libraryTypeSchema =
-      FRParserObjectFieldSchema(
-        name = "library_type",
-        parser = {
-          FRValueParsers.forString { this.libraryType = it }
-        },
-        isOptional = true
-      )
-
     return OPDS20MetadataRoleExtensionType.ExtensionSchemas(
       objectFieldSchemas = listOf(
-        adobeVendorIdSchema,
         distanceSchema,
         idSchema,
         isAutomaticSchema,
         isProductionSchema,
-        libraryTypeSchema,
         locationSchema,
         updatedSchema,
       ),
       onCompletion = {
         OPDS20CatalogMetadata(
-          adobeVendorId = this.adobeVendorId,
           distance = this.distance,
           id = this.id,
           isAutomatic = this.isAutomatic,
           isProduction = this.isProduction,
-          libraryType = this.libraryType,
-          location = this.location,
+          areaServed = this.areaServed,
           updated = this.updated,
         )
       }

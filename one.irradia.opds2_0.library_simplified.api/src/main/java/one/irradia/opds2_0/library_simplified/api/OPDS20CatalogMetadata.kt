@@ -26,12 +26,6 @@ data class OPDS20CatalogMetadata(
   val isAutomatic: Boolean,
 
   /**
-   * Library Simplified catalogs might serve an "adobe_vendor_id" property.
-   */
-
-  val adobeVendorId: String?,
-
-  /**
    * Library Simplified catalogs use "updated" instead of "modified".
    *
    * @see "https://readium.org/webpub-manifest/context.jsonld"
@@ -48,12 +42,12 @@ data class OPDS20CatalogMetadata(
   val id: URI?,
 
   /**
-   * Library Simplified catalogs use a "location" property to express library service areas.
+   * Library Simplified catalogs use a "areaServed" property to express library service areas.
    *
-   * @see "https://github.com/NYPL-Simplified/Simplified/wiki/LibraryRegistryPublicAPI#the-location-property"
+   * @see "https://github.com/NYPL-Simplified/Simplified/wiki/LibraryRegistryPublicAPI#the-schemaareaserved-property"
    */
 
-  val location: String?,
+  val areaServed: String?,
 
   /**
    * Library Simplified catalogs use a "distance" property to express the distance between the user and a library.
@@ -61,14 +55,6 @@ data class OPDS20CatalogMetadata(
    * @see "https://github.com/NYPL-Simplified/Simplified/wiki/LibraryRegistryPublicAPI#the-distance-property"
    */
 
-  val distance: String?,
-
-  /**
-   * Library Simplified catalogs use a "library_type" property to describe library services.
-   *
-   * @see "https://github.com/NYPL-Simplified/Simplified/wiki/LibraryRegistryPublicAPI#the-library_type-property"
-   */
-
-  val libraryType: String?
+  val distance: String?
 
 ) : OPDS20ExtensionElementType

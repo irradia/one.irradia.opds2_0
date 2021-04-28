@@ -20,6 +20,12 @@ data class OPDS20Catalog(
    * The catalog links
    */
 
-  val links: List<OPDS20Link>
+  val links: List<OPDS20Link>,
+
+  /**
+   * The catalog images
+   */
+
+  val images: List<OPDS20Link>
 
 ) : OPDS20ExtensionElementType
