@@ -145,6 +145,7 @@ class OPDS20ValueParserMetadata(
       title = this.title,
       identifier = this.identifier,
       subtitle = this.subtitle,
+      description = this.description,
       modified = this.modified,
       published = this.published,
       languages = this.languages.toList(),

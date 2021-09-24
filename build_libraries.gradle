@@ -43,6 +43,8 @@ ext.libraries = [
   joda_time                  : "joda-time:joda-time:${libraryVersions.joda_time}",
   junit_jupiter_api          : "org.junit.jupiter:junit-jupiter-api:${libraryVersions.junit_jupiter}",
   junit_jupiter_engine       : "org.junit.jupiter:junit-jupiter-engine:${libraryVersions.junit_jupiter}",
+  junit_jupiter_params       : "org.junit.jupiter:junit-jupiter-params:${libraryVersions.junit_jupiter}",
+  junit_vintage              : "org.junit.vintage:junit-vintage-engine:${libraryVersions.junit_jupiter}",
   kotlin_reflect             : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
   kotlin_stdlib              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
   logback                    : "ch.qos.logback:logback-classic:${libraryVersions.logback}",
