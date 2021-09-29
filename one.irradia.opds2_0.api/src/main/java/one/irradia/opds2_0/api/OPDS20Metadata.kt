@@ -28,6 +28,12 @@ data class OPDS20Metadata(
   val subtitle: OPDS20Title?,
 
   /**
+   * The description of the publication.
+   */
+
+  val description: String?,
+
+  /**
    * The time the publication was last modified.
    */
 

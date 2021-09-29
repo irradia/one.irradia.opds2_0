@@ -20,13 +20,21 @@ dependencies {
   api project(":one.irradia.opds2_0.parser.extension.library_simplified")
   api project(":one.irradia.opds2_0.parser.vanilla")
 
-  api libraries.junit_jupiter_api
-  api libraries.junit_jupiter_engine
   api libraries.slf4j
   api libraries.irradia_mime_impl
 
   implementation libraries.kotlin_stdlib
   implementation libraries.kotlin_reflect
+
+  implementation libraries.junit_vintage
+  implementation libraries.junit_jupiter_api
+  implementation libraries.junit_jupiter_engine
+  implementation libraries.junit_jupiter_params
+
+  testImplementation libraries.junit_vintage
+  testImplementation libraries.junit_jupiter_api
+  testImplementation libraries.junit_jupiter_engine
+  testImplementation libraries.junit_jupiter_params
 
   testImplementation libraries.logback
 }

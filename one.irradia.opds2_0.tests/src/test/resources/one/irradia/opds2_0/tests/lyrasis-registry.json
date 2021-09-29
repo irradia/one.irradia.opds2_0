@@ -1,0 +1,180 @@
+{
+  "metadata": {
+    "title": "Libraries",
+    "adobe_vendor_id": "ThePalaceProject"
+  },
+  "catalogs": [
+    {
+      "metadata": {
+        "id": "urn:uuid:6b849570-070f-43b4-9dcc-7ebb4bca292e",
+        "title": "Digital Public Library of America",
+        "modified": "2021-09-02T01:43:04Z",
+        "updated": "2021-09-02T01:43:04Z",
+        "description": "Popular books free to download and keep, handpicked by librarians across the US."
+      },
+      "links": [
+        {
+          "rel": "http://opds-spec.org/catalog",
+          "href": "https://openbookshelf.dp.la/OB/groups/3",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition"
+        },
+        {
+          "href": "https://openbookshelf.dp.la/OB/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "rel": "alternate",
+          "href": "https://dp.la/",
+          "type": "text/html"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/eligibility",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:6b849570-070f-43b4-9dcc-7ebb4bca292e/eligibility",
+          "type": "application/geo+json"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/focus",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:6b849570-070f-43b4-9dcc-7ebb4bca292e/focus",
+          "type": "application/geo+json"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "id": "urn:uuid:f60b644e-4955-4996-a4e5-a192feb4e7f8",
+        "title": "Internet Archive",
+        "modified": "2021-09-02T01:42:29Z",
+        "updated": "2021-09-02T01:42:29Z",
+        "description": "Universal Access to All Knowledge"
+      },
+      "links": [
+        {
+          "rel": "http://opds-spec.org/catalog",
+          "href": "https://bookserver.archive.org/simple",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition"
+        },
+        {
+          "href": "https://bookserver.archive.org/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "rel": "alternate",
+          "href": "https://archive.org",
+          "type": "text/html"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/eligibility",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:f60b644e-4955-4996-a4e5-a192feb4e7f8/eligibility",
+          "type": "application/geo+json"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/focus",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:f60b644e-4955-4996-a4e5-a192feb4e7f8/focus",
+          "type": "application/geo+json"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "id": "urn:uuid:93a0b91e-b0f4-450a-9fef-bb57190e5d09",
+        "title": "LYRASIS Reads",
+        "modified": "2021-09-13T12:38:08Z",
+        "updated": "2021-09-13T12:38:08Z",
+        "description": "A testing library of the LYRASIS organization."
+      },
+      "links": [
+        {
+          "rel": "http://opds-spec.org/catalog",
+          "href": "https://gorgon.tpp-qa.lyrasistechnology.org/lyrasis-reads/",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition"
+        },
+        {
+          "href": "https://gorgon.tpp-qa.lyrasistechnology.org/lyrasis-reads/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "rel": "alternate",
+          "href": "https://www.lyrasis.org/Pages/Main.aspx",
+          "type": "text/html"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/eligibility",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:93a0b91e-b0f4-450a-9fef-bb57190e5d09/eligibility",
+          "type": "application/geo+json"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/focus",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:93a0b91e-b0f4-450a-9fef-bb57190e5d09/focus",
+          "type": "application/geo+json"
+        },
+        {
+          "rel": "help",
+          "href": "mailto:support@thepalaceproject.org",
+          "properties": {
+            "https://schema.org/reservationStatus": "https://schema.org/ReservationConfirmed"
+          }
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/designated-agent/copyright",
+          "href": "mailto:support@librarysimplifiedhelp.zendesk.com",
+          "properties": {
+            "https://schema.org/reservationStatus": "https://schema.org/ReservationConfirmed"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "id": "urn:uuid:5278562c-d642-4fda-ad7e-1613077cfb8d",
+        "title": "Open Textbook Library",
+        "modified": "2021-09-02T01:42:47Z",
+        "updated": "2021-09-02T01:42:47Z",
+        "description": "Textbooks licensed under Creative Commons and provided through the Open Textbook Library."
+      },
+      "links": [
+        {
+          "rel": "http://opds-spec.org/catalog",
+          "href": "http://open.minitex.org/textbooks/",
+          "type": "application/atom+xml;profile=opds-catalog;kind=acquisition"
+        },
+        {
+          "href": "http://open.minitex.org/textbooks/authentication_document",
+          "type": "application/vnd.opds.authentication.v1.0+json"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/eligibility",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:5278562c-d642-4fda-ad7e-1613077cfb8d/eligibility",
+          "type": "application/geo+json"
+        },
+        {
+          "rel": "http://librarysimplified.org/rel/registry/focus",
+          "href": "https://registry.palaceproject.io/library/urn:uuid:5278562c-d642-4fda-ad7e-1613077cfb8d/focus",
+          "type": "application/geo+json"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://registry.palaceproject.io/libraries",
+      "type": "application/opds+json"
+    },
+    {
+      "href": "https://registry.palaceproject.io/search",
+      "rel": "search",
+      "type": "application/opensearchdescription+xml"
+    },
+    {
+      "href": "https://registry.palaceproject.io/register",
+      "rel": "register",
+      "type": "application/opds+json;profile=https://librarysimplified.org/rel/profile/directory"
+    },
+    {
+      "href": "https://registry.palaceproject.io/library/{uuid}",
+      "rel": "http://librarysimplified.org/rel/registry/library",
+      "type": "application/opds+json",
+      "templated": true
+    }
+  ]
+}

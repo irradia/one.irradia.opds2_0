@@ -6,6 +6,7 @@ import one.irradia.opds2_0.library_simplified.api.OPDS20CatalogMetadata
 import one.irradia.opds2_0.parser.api.OPDS20FeedParserProviderType
 import one.irradia.opds2_0.parser.extension.library_simplified.OPDS20CatalogExtension
 import one.irradia.opds2_0.parser.vanilla.OPDS20FeedParsers
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -197,5 +198,26 @@ class OPDS20ParsersVanillaTest {
     val catalogMeta = catalog.metadata.extensionOf(OPDS20CatalogMetadata::class.java)
     assertEquals("14 km.", catalogMeta!!.distance)
     assertEquals("Kings County, NY", catalogMeta.areaServed)
+  }
+
+  @Test
+  fun testLibraryRegistryLyrasis() {
+    val parser =
+      this.parsers.createParser(
+        documentURI = URI.create("urn:test"),
+        stream = resource("lyrasis-registry.json"))
+
+    val result = parser.parse()
+    this.dumpParseResult(result)
+
+    val success = result as OPDS20ParseResult.OPDS20ParseSucceeded
+    assertEquals(0, success.warnings.size)
+
+    val feed = success.result
+    val catalogs = feed.extensions.find { it is OPDS20CatalogList } as OPDS20CatalogList
+
+    for (catalog in catalogs.catalogs) {
+      assertNotNull(catalog.metadata.description)
+    }
   }
 }

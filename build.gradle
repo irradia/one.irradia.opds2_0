@@ -152,6 +152,14 @@ Automatic-Module-Name: ${POM_AUTOMATIC_MODULE_NAME}
 -removeheaders: Bnd-LastModified, Tool, Private-Package
 """
       }
+
+      test {
+        useJUnitPlatform()
+        dependsOn 'cleanTest'
+        testLogging {
+          events "passed", "skipped", "failed"
+        }
+      }
       break
 
     case "apk":
@@ -202,6 +210,9 @@ Automatic-Module-Name: ${POM_AUTOMATIC_MODULE_NAME}
         testOptions {
           execution "ANDROID_TEST_ORCHESTRATOR"
           animationsDisabled = true
+          unitTests.all {
+            useJUnitPlatform() // <--- this is the important part
+          }
         }
       }
       break
